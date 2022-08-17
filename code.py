@@ -84,16 +84,6 @@ def drawClockHourTics(output):
     z += 30
 
 '''
-Draw the clock hand
-'''
-def drawClockSecHand( output ):
-    angle = math.radians(SEC * 6)
-    x2 = int( centerX + (math.sin(angle) * (radius) ) )
-    y2 = int( centerY - (math.cos(angle) * (radius) ) )
-    line = Line( centerX, centerY, x2, y2, BLACK )
-    output.append( line )
-
-'''
 Draw the minute hand
 '''
 def drawClockMinHand( output ):
@@ -143,7 +133,6 @@ def drawClock(display):
   drawClockCircle(splash)
   drawClockCenter(splash)
   drawClockHourTics(splash)
-  drawClockSecHand(splash)
   drawClockMinHand(splash)
   drawClockHourHand(splash)
 
@@ -169,7 +158,6 @@ def main():
 
   magtag = MagTag()
   display = magtag.display
-  #magtag.set_background(0xffffff)
 
   WIDTH = display.width
   HEIGHT = display.height
@@ -188,8 +176,7 @@ def main():
   display.refresh()
 
   while True:
-    #time.sleep(11)
-    magtag.enter_light_sleep(11)
+    magtag.exit_and_deep_sleep(60)
     drawClock(display)
 
     while display.time_to_refresh > 0:
